@@ -83,7 +83,7 @@ class HTTPServer:
 
         elif data["status"] == "404":
             respons_headers = "HTTP/1.1 404 Not Find\r\n"
-            respons_line = "Content-Type:text/html"
+            respons_line = "Content-Type:text/html\r\n"
             respons_body = data["data"]
             respons = respons_headers + respons_line + "\r\n" + respons_body
 
