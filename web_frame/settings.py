@@ -7,4 +7,4 @@ PORT = 40527
 
 DEBUG = True
 
-STATIC_DIR="./static"
+STATIC_DIR = "./static"

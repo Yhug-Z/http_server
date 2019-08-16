@@ -88,4 +88,3 @@ class HTTPServer:
             respons = respons_headers + respons_line + "\r\n" + respons_body
 
         connfd.send(respons.encode())
-

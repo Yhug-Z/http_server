@@ -48,16 +48,16 @@ class Application:
     def __handle(self, connfd):
         request = connfd.recv(128).decode()
         request = json.loads(request)
-        #print(data){'method': 'GET', 'info': '/'}
-        if request["method"]=="GET":
-            if request["info"]=="/" or request["info"][-5:]==".html":
-                response=self.__get_html(request["info"])
+        # print(data){'method': 'GET', 'info': '/'}
+        if request["method"] == "GET":
+            if request["info"] == "/" or request["info"][-5:] == ".html":
+                response = self.__get_html(request["info"])
             else:
                 # print("---")
-                with open(os.path.join(self.__static,"404.html")) as fd:
-                    response=json.dumps({"status": "404", "data": fd.read()})
+                with open(os.path.join(self.__static, "404.html")) as fd:
+                    response = json.dumps({"status": "404", "data": fd.read()})
 
-        elif request["method"]=="POST":
+        elif request["method"] == "POST":
             pass
         # response=json.dumps(response)
 
@@ -73,23 +73,23 @@ class Application:
         self.__sockfd.bind(self.__address)
 
     def __get_html(self, info):
-        if info=="/":
+        if info == "/":
             # print(self.__static)
-            filename=os.path.join(self.__static,"index.html")
+            filename = os.path.join(self.__static, "index.html")
             # print(filename)
         else:
-            filename=os.path.join(self.__static,info[1:])
+            filename = os.path.join(self.__static, info[1:])
             # print(filename)
         try:
             # print(filename)
-            fd=open(filename)
-            status="200"
-        except :
+            fd = open(filename)
+            status = "200"
+        except:
 
-            fd=open(os.path.join(self.__static,"404.html"))
-            status="404"
+            fd = open(os.path.join(self.__static, "404.html"))
+            status = "404"
         finally:
-            data=fd.read()
+            data = fd.read()
             # print(data)
             fd.close()
-            return json.dumps({"status":status,"data":data})
+            return json.dumps({"status": status, "data": data})
